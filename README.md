@@ -21,3 +21,21 @@ Exiting the Program: Users have the option to exit the banking application.
 
 #Task3
 
+Display Available Rooms:
+
+Users can view a list of available rooms along with their room numbers and categories.
+Make a Reservation:
+
+Users can make reservations by providing their name, selecting a room from the available options, and specifying check-in and check-out dates.
+Upon successful reservation, users receive a unique reservation ID for reference.
+View Booking Details:
+
+Users can view details of a specific reservation by entering its reservation ID.
+The system displays information such as guest name, room number, category, check-in date, and check-out date.
+Provide Feedback:
+
+Users can provide feedback about their experience using the hotel reservation system.
+Feedback includes rating the experience on a scale of 1 to 5 stars and leaving optional comments.
+Error Handling:
+
+
