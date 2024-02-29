@@ -68,10 +68,30 @@ class Reservation {
     }
 }
 
+class Feedback {
+    private int feedbackId;
+    private String guestName;
+    private String message;
+    private int rating;
+    private Date timestamp;
+
+    public Feedback(int feedbackId, String guestName, String message, int rating, Date timestamp) {
+        this.feedbackId = feedbackId;
+        this.guestName = guestName;
+        this.message = message;
+        this.rating = rating;
+        this.timestamp = timestamp;
+    }
+
+    // Add getters and setters
+}
+
 class Hotel {
     private List<Room> rooms;
     private List<Reservation> reservations;
+    private List<Feedback> feedbacks;
     private int reservationIdCounter;
+    private int feedbackIdCounter;
 
     public List<Room> getRooms() {
         return rooms;
@@ -80,12 +100,14 @@ class Hotel {
     public Hotel() {
         rooms = new ArrayList<>();
         reservations = new ArrayList<>();
+        feedbacks = new ArrayList<>();
         // Initialize some rooms
         rooms.add(new Room(101, "Standard"));
         rooms.add(new Room(102, "Standard"));
         rooms.add(new Room(201, "Deluxe"));
         rooms.add(new Room(202, "Deluxe"));
         reservationIdCounter = 1;
+        feedbackIdCounter = 1;
     }
 
     public void displayAvailableRooms() {
@@ -118,6 +140,12 @@ class Hotel {
         }
         System.out.println("Reservation not found with ID: " + reservationId);
     }
+
+    public void collectFeedback(String guestName, String message, int rating) {
+        Feedback feedback = new Feedback(feedbackIdCounter++, guestName, message, rating, new Date());
+        feedbacks.add(feedback);
+        System.out.println("Thank you for your feedback!");
+    }
 }
 
 public class HotelReservationSystem {
@@ -130,7 +158,8 @@ public class HotelReservationSystem {
             System.out.println("1. Display available rooms");
             System.out.println("2. Make a reservation");
             System.out.println("3. View booking details");
-            System.out.println("4. Exit");
+            System.out.println("4. Provide feedback");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
@@ -163,16 +192,25 @@ public class HotelReservationSystem {
                         }
                     }
                     break;
-
                 case 3:
                     System.out.print("Enter reservation ID: ");
                     int reservationId = scanner.nextInt();
                     hotel.displayBookingDetails(reservationId);
                     break;
                 case 4:
+                    System.out.print("Enter your name: ");
+                    scanner.nextLine(); // Consume newline
+                    String feedbackName = scanner.nextLine();
+                    System.out.print("Rate your experience (1-5 stars): ");
+                    int rating = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    System.out.print("Leave a message (optional): ");
+                    String message = scanner.nextLine();
+                    hotel.collectFeedback(feedbackName, message, rating);
+                    break;
+                case 5:
                     System.out.println("Thank you for using the system. Goodbye!");
                     System.exit(0);
-                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
